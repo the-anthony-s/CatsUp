@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User test', type: :request do
+RSpec.describe 'Users test', type: :request do
   let!(:users) { create_list(:user, 10) }
   let(:user_id) { users.last.id }
   let(:user_name) { users.last.name }

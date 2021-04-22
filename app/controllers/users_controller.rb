@@ -5,8 +5,10 @@ class UsersController < ActionController::API
   before_action :set_user, only: %i[show update destroy]
 
   def index
+    # display selected users or return all
     ids = user_params[:ids] ? user_params[:ids].split(',').map(&:to_i) : nil
     @user = ids ? User.where(id: ids).index_by(&:id).slice(*ids).values : User.all
+
     json_response(@user)
   end
 
@@ -36,8 +38,8 @@ class UsersController < ActionController::API
   private
 
   # Allow only trusted parameters
+  # :ids -> to get an array of records
   def user_params
-    # :ids -> to display an array of records
     params.permit(:ids, :name, :email)
   end
 
