@@ -6,5 +6,6 @@ RSpec.describe Channel, type: :model do
 
   # Relationships
   it { should belong_to(:user) }
+  it { should belong_to(:recipient) }
   it { should have_many(:messages).dependent(:destroy) }
 end

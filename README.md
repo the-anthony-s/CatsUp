@@ -33,10 +33,10 @@
 ```curl http://localhost:3000/channels/1```
 
 #### Create Chat Room
-```curl -i -X POST -H "Content-Type:application/json" http://localhost:3000/channels -d '{"name": "...", "user_id": ...}'``` 
+```curl -i -X POST -H "Content-Type:application/json" http://localhost:3000/channels -d '{"name": "...", "user_id": ..., "recipient_id": ...}'``` 
 
 #### Update Chat Room
-```curl -i -X PUT -H "Content-Type:application/json" http://localhost:3000/channels/1 -d '{"name": "...", "user_id": ...}'```
+```curl -i -X PUT -H "Content-Type:application/json" http://localhost:3000/channels/1 -d '{"name": "...", "user_id": ..., "recipient_id": ...}'```
 
 #### Delete Chat Room
 ```curl -i -X DELETE http://localhost:3000/channels/1```

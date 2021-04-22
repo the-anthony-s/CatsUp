@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Channels test', type: :request do
   # initialize test data
   let!(:user) { create(:user) }
-  let!(:channels) { create_list(:channel, 10, user: user.id) }
+  let!(:recipient) { create(:user) }
+  let!(:channels) { create_list(:channel, 10, user: user.id, recipient_id: recipient.id) }
   let(:first_channel) { channels.first }
   let(:channel_id) { first_channel.id }
   let(:channel_name) { first_channel.name }
@@ -65,7 +66,7 @@ RSpec.describe 'Channels test', type: :request do
     end
 
     context 'when the request is valid but channel exists' do
-      let(:valid_attributes) { { name: first_channel.name, user_id: user.id } }
+      let(:valid_attributes) { { name: first_channel.name, user_id: user.id, recipient_id: recipient.id } }
       before { post '/channels', params: valid_attributes }
 
       it 'returns a validation failure message' do
@@ -85,7 +86,7 @@ RSpec.describe 'Channels test', type: :request do
   # test :create
   # PUT /channels/:id
   describe 'PUT /channels/:id' do
-    let(:valid_attributes) { { name: 'Cats for the win', user_id: user.id } }
+    let(:valid_attributes) { { name: 'Cats for the win', user_id: user.id, recipient_id: recipient.id } }
 
     context 'when the record exists' do
       before { put "/channels/#{channel_id}", params: valid_attributes }

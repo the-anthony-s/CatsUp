@@ -42,7 +42,7 @@ class ChannelsController < ActionController::API
 
   # Allow only trusted parameters
   def channel_params
-    params.permit(:name, :user_id)
+    params.permit(:name, :user_id, :recipient_id)
   end
 
   def set_channel
