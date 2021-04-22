@@ -1,24 +1,26 @@
-# README
+## JSON response wrapper
+- attach the link here + explain why
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## USERS
+Model test: PASS (2)
+Routes test: PASS (6)
 
-* Ruby version
 
-* System dependencies
+### list all users
+```curl http://localhost:3000/users```
 
-* Configuration
+### show list of selected users
+```curl http://localhost:3000/users?ids=:id,:id,:id```
 
-* Database creation
+### create new user
+```curl -i -X POST -H "Content-Type:application/json" http://localhost:3000/users -d '{"name": "...", "email": "..."}'```
 
-* Database initialization
+### show user
+```curl http://localhost:3000/users/:id```
 
-* How to run the test suite
+### update user
+```curl -i -X PUT -H "Content-Type:application/json" http://localhost:3000/users/:id -d '{"name": "...", "email": "..."}'```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### destroy user
+```curl -i -X DELETE http://localhost:3000/users/:id```
