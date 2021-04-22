@@ -4,8 +4,7 @@ class ChannelsController < ActionController::API
 
   before_action :set_channel, only: %i[show update destroy]
 
-  # GET
-  # /channels
+  # GET /channels
   def index
     @channels = Channel.all
     json_response(@channels)
@@ -36,6 +35,14 @@ class ChannelsController < ActionController::API
   def destroy
     @channel.destroy
     head :no_content
+  end
+
+  # GET /channels/search?name=params[:name]
+  def search
+    name = channel_params[:name] ? channel_params[:name].downcase : ' '
+    @channels = Channel.where('lower(name) LIKE ?', "%#{name}%").map(&:as_json)
+
+    json_response(@channels)
   end
 
   private

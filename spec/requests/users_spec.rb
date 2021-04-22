@@ -88,7 +88,7 @@ RSpec.describe 'Users test', type: :request do
     end
   end
 
-  # Test suite for PUT /users/:id
+  # PUT /users/:id
   describe 'PUT /users/:id' do
     let(:valid_attributes) { { name: 'Wonderland' } }
 
@@ -101,12 +101,63 @@ RSpec.describe 'Users test', type: :request do
     end
   end
 
-  # Test suite for DELETE /users/:id
+  # DELETE /users/:id
   describe 'DELETE /users/:id' do
     before { delete "/users/#{user_id}" }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
+    end
+  end
+
+  # GET /users/search?name=params[:name]&email=params[:email]
+  describe 'GET /users/search' do
+    before { get "/users/search?name=#{user_name}&email=#{user_email}" }
+
+    context 'when the record exists' do
+      it 'returns the users' do
+        expect(JSON.parse(response.body)).not_to be_empty
+      end
+
+      it 'contains the user' do
+        expect(JSON.parse(response.body).first['name']).to eq(user_name)
+        expect(JSON.parse(response.body).first['email']).to eq(user_email)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the params are uppercase' do
+      let(:user_name) { users.first.name.upcase }
+      let(:user_email) { users.first.email.upcase }
+
+      it 'returns the users' do
+        expect(JSON.parse(response.body)).not_to be_empty
+      end
+
+      it 'contains the user in uppercase' do
+        expect(JSON.parse(response.body).first['name'].upcase).to eq(user_name)
+        expect(JSON.parse(response.body).first['email'].upcase).to eq(user_email)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the record does not exist' do
+      let(:user_name) { 'veryyyyyyllllooooongname' }
+      let(:user_email) { 'veryyyylongemaail@gmail.com' }
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns an empty array' do
+        expect(JSON.parse(response.body)).to be_empty
+      end
     end
   end
 end

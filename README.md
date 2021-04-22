@@ -22,6 +22,9 @@
 ### destroy user
 ```curl -i -X DELETE http://localhost:3000/users/:id```
 
+### search user by name or (and) email
+```curl http://localhost:3000/users/search?name=...&email=...```
+
 --------------
 
 ## CHANNELS
@@ -40,6 +43,9 @@
 
 #### Delete Chat Room
 ```curl -i -X DELETE http://localhost:3000/channels/1```
+
+#### Search channels by name
+```curl http://localhost:3000/channels/search?name=...```
 
 --------------
 

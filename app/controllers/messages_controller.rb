@@ -7,28 +7,33 @@ class MessagesController < ActionController::API
 
   after_action :send_message, only: %i[create], if: -> { @message }
 
+  # GET channels/:channel_id/messages
   def index
     json_response(@channel.messages)
   end
 
   def new; end
 
+  # POST channels/:channel_id/messages
   def create
     @message = @channel.messages.create!(message_params)
     json_response(@message, :created)
   end
 
+  # GET channels/:channel_id/messages/:id
   def show
     json_response(@message)
   end
 
   def edit; end
 
+  # PATCH/PUT channels/:channel_id/messages/:id
   def update
     @message.update(message_params)
     head :no_content
   end
 
+  # DELETE channels/:channel_id/messages/:id
   def destroy
     @message.destroy
     head :no_content

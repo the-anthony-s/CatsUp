@@ -101,12 +101,62 @@ RSpec.describe 'Channels test', type: :request do
     end
   end
 
-  # Test suite for DELETE /channels/:id
+  # test :destroy
+  # DELETE /channels/:id
   describe 'DELETE /channels/:id' do
     before { delete "/channels/#{channel_id}" }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
+    end
+  end
+
+  # test :search
+  # GET /channels/search?name=params[:name]
+  describe 'GET /channels/search' do
+    # make HTTP get request before each example
+    before { get "/channels/search?name=#{channel_name}" }
+
+    context 'when the record exists' do
+      it 'returns the channels' do
+        expect(json).not_to be_empty
+      end
+
+      it 'contains the channels' do
+        expect(json.first['name']).to eq(channel_name)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the params are uppercase' do
+      let(:channel_name) { chat_rooms.first.name.upcase }
+
+      it 'returns the channels' do
+        expect(JSON.parse(response.body)).not_to be_empty
+      end
+
+      it 'contains the channels in uppercase' do
+        expect(JSON.parse(response.body).first['name'].upcase).to eq(channel_name)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the record does not exist' do
+      let(:channel_name) { 'Homestars Gif Battle' }
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns an empty array' do
+        expect(JSON.parse(response.body)).to be_empty
+      end
     end
   end
 end

@@ -4,6 +4,7 @@ class UsersController < ActionController::API
 
   before_action :set_user, only: %i[show update destroy]
 
+  # GET /users
   def index
     # display selected users or return all
     ids = user_params[:ids] ? user_params[:ids].split(',').map(&:to_i) : nil
@@ -14,25 +15,38 @@ class UsersController < ActionController::API
 
   def new; end
 
+  # POST /users
   def create
     @user = User.create!(user_params)
     json_response(@user, :created)
   end
 
+  # GET /users/:id
   def show
     json_response(@user)
   end
 
   def edit; end
 
+  # PATCH/PUT /users/:id
   def update
     @user.update(user_params)
     head :no_content
   end
 
+  # DELETE /users/:id
   def destroy
     @user.destroy
     head :no_content
+  end
+
+  # GET /users/search?name=params[:name]&email=params[:email]
+  def search
+    name = user_params[:name] ? user_params[:name].downcase : ' '
+    email = user_params[:email] ? user_params[:email].downcase : ' '
+    @users = User.where('lower(name) LIKE ? OR lower(email) LIKE ?', "%#{name}%", "%#{email}%").map(&:as_json)
+
+    json_response(@users)
   end
 
   private
