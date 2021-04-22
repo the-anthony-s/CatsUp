@@ -1,3 +1,8 @@
+Thank you for the project.
+
+The idea was to create a Rails app separated from the `front-end` similarly to Airbnb or Netflix logic, using Rails on the `back-end` and React on the `front-end`.
+
+
 ## JSON response wrapper
 
 You can notice that in all controllers, I use `json_response` method. It's a wrapper that will allow modifying JSON render. Ideally, I would use the Netflix approach; more information here: https://anmagpie.medium.com/rails-api-with-fastjson-from-netflix-e7bf4f4e5e7b . It will speed up the back-end process and help the servers to work more efficient.
@@ -117,3 +122,4 @@ Selected features:
 3. Add sorting through `url` params. Example: `http://localhost:3000/users?region=params[:region]&time=params[:time]`
 4. Add more statistics for each model (Region, IP address, Count private accounts, etc.)
 5. Add `FastJSON` to serialize JSON responses (better performance)
+6. Add the front-end part as a separate project.
