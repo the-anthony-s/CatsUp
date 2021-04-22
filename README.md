@@ -92,11 +92,13 @@ https://github.com/the-anthony-s/CatsUp/tree/master/spec
 
 Heroku link: https://a917201999.herokuapp.com/
 
-Heroku database: ```postgres://sphvhbdezhtikd:93c91627e2b6524b75cf1864e25ef96b6259f9563cc07aa69106a027bf470095@ec2-3-217-219-146.compute-1.amazonaws.com:5432/dfp8t9s2qqqh15```
-
 Example: ```curl https://a917201999.herokuapp.com/users/2```
 
 > Please note that I am using a free server. The first server request may take some time to process.
+
+
+Heroku database: ```postgres://sphvhbdezhtikd:93c91627e2b6524b75cf1864e25ef96b6259f9563cc07aa69106a027bf470095@ec2-3-217-219-146.compute-1.amazonaws.com:5432/dfp8t9s2qqqh15```
+
 
 ![dddd](https://media.giphy.com/media/PD9hjqdeidgqY/giphy-downsized.gif)
 
