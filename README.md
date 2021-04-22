@@ -1,12 +1,8 @@
 ## JSON response wrapper
 - attach the link here + explain why
 
-
-## USERS
-Model test (2): PASS
-Routes test (6): PASS
-Requests test (11): PASS
-
+## Tests
+- attach links
 
 ### list all users
 ```curl http://localhost:3000/users```
@@ -36,15 +32,30 @@ Requests test (11): PASS
 #### Show Chat Room
 ```curl http://localhost:3000/channels/1```
 
-#### Search Chat Rooms
-This is use for asyncronous search of users. In case it doesn't find any user will return empty array `[]`.
-```curl http://localhost:3000/channels/search?name=Sport```
-
 #### Create Chat Room
-```curl -i -X POST -H "Content-Type:application/json" http://localhost:3000/channels -d '{"name": "games", "created_id": 1, "sender_id": 1, "recipient_id": 1}'``` 
+```curl -i -X POST -H "Content-Type:application/json" http://localhost:3000/channels -d '{"name": "...", "user_id": ...}'``` 
 
 #### Update Chat Room
-```curl -i -X PUT -H "Content-Type:application/json" http://localhost:3000/channels/1 -d '{"name": "games", "created_id": 1, "sender_id": 1, "recipient_id": 1}'```
+```curl -i -X PUT -H "Content-Type:application/json" http://localhost:3000/channels/1 -d '{"name": "...", "user_id": ...}'```
 
 #### Delete Chat Room
 ```curl -i -X DELETE http://localhost:3000/channels/1```
+
+--------------
+
+## MESSAGES
+
+#### Get Messages
+```curl http://localhost:3000/channels/[:channel_id]/messages```
+
+#### Show Message
+```curl http://localhost:3000/channels/[:channel_id]/messages/[:message_id]```
+
+#### Create Message
+```curl -i -X POST -H "Content-Type:application/json" http://localhost:3000/channels/[:channel_id]/messages -d '{"message": "Make Homestars better", "user_id": ...}'``` 
+
+#### Update Message -> Setup for Front-end, task #4
+```curl -i -X PUT -H "Content-Type:application/json" http://localhost:3000/channels/[:channel_id]/messages/[:message_id] -d '{"message": "Make Homestars even better", "user_id": ...}'``` 
+
+#### Delete Message -> Setup for Front-end, task #5
+```curl -i -X DELETE http://localhost:3000/channels/[:channel_id]/messages/[:message_id]```
