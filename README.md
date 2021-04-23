@@ -5,7 +5,7 @@ The idea was to create a Rails app separated from the `front-end` similarly to A
 
 ## JSON response wrapper
 
-You can notice that in all controllers, I use `json_response` method. It's a wrapper that will allow modifying JSON render. Ideally, I would use the Netflix approach; more information here: https://anmagpie.medium.com/rails-api-with-fastjson-from-netflix-e7bf4f4e5e7b . It will speed up the back-end process and help the servers to work more efficient.
+You can notice that in all controllers, I use the `json_response` method. It's a wrapper that separates the JSON render logic. Ideally, I would use the Netflix approach; more information here: https://anmagpie.medium.com/rails-api-with-fastjson-from-netflix-e7bf4f4e5e7b . It will speed up the back-end process and help the servers to work more efficient.
 
 More information about `json_response` method: https://github.com/the-anthony-s/CatsUp/blob/master/app/controllers/concerns/response.rb
 
@@ -32,16 +32,16 @@ https://github.com/the-anthony-s/CatsUp/tree/master/spec
 ```curl -i -X POST -H "Content-Type:application/json" http://localhost:3000/users -d '{"name": "...", "email": "..."}'```
 
 ### Show specific user
-```curl http://localhost:3000/users/:id```
+```curl http://localhost:3000/users/[:id]```
 
 ### Update user
 ```curl -i -X PUT -H "Content-Type:application/json" http://localhost:3000/users/:id -d '{"name": "...", "email": "..."}'```
 
 ### Destroy user
-```curl -i -X DELETE http://localhost:3000/users/:id```
+```curl -i -X DELETE http://localhost:3000/users/[:id]```
 
 ### Search user by name or (and) email
-```curl http://localhost:3000/users/search?name=...&email=...```
+```curl http://localhost:3000/users/search?name=params[:name]&email=params[:email]```
 
 
 
@@ -51,19 +51,19 @@ https://github.com/the-anthony-s/CatsUp/tree/master/spec
 ```curl http://localhost:3000/channels```
 
 ### Show Chat Room
-```curl http://localhost:3000/channels/1```
+```curl http://localhost:3000/channels/[:id]```
 
 ### Create Chat Room
 ```curl -i -X POST -H "Content-Type:application/json" http://localhost:3000/channels -d '{"name": "...", "user_id": ..., "recipient_id": ...}'``` 
 
 ### Update Chat Room
-```curl -i -X PUT -H "Content-Type:application/json" http://localhost:3000/channels/1 -d '{"name": "...", "user_id": ..., "recipient_id": ...}'```
+```curl -i -X PUT -H "Content-Type:application/json" http://localhost:3000/channels/[:id] -d '{"name": "...", "user_id": ..., "recipient_id": ...}'```
 
 ### Delete Chat Room
-```curl -i -X DELETE http://localhost:3000/channels/1```
+```curl -i -X DELETE http://localhost:3000/channels/[:id]```
 
 ### Search channels by name
-```curl http://localhost:3000/channels/search?name=...```
+```curl http://localhost:3000/channels/search?name=params[:name]```
 
 
 
@@ -109,7 +109,7 @@ PS: 917201999 stands for [Pa][N][Ca][K][Es] ~ Chemistry :)
 
 ## Few words on which features were selected and why?
 
-My goal was to focus on the core features for the web-chat application, such as messaging between users, adding and modifying channels, creating messages and updating them. In my opinion, these functions are the most important for the user.
+My goal was to focus on the core features of the web-chat application, such as messaging between users, adding and modifying channels, creating messages and updating them. In my opinion, these functions are the most important for the user.
 
 Selected features:
 1. As a consumer of the API, I can persist my chat messages
