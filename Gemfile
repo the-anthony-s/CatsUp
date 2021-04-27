@@ -29,11 +29,14 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # Annotations
+  gem 'annotate'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+gem 'active_model_serializers'
 # Generate fake data
 gem 'faker'
 # Automize testing with random objects
@@ -46,3 +49,5 @@ gem 'redis'
 gem 'redis-namespace'
 # Provides a full set of stores (Cache, Session, HTTP Cache) for Ruby on Rails
 gem 'redis-rails'
+# JSON performance
+gem 'oj'

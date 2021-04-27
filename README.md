@@ -127,3 +127,7 @@ Selected features:
 4. Add more statistics for each model (Region, IP address, Count private accounts, etc.)
 5. Add `FastJSON` to serialize JSON responses (better performance)
 6. Add the front-end part as a separate project.
+
+
+- Add caching -> Memcached
+- Throttling by IP address, by API key, control it per path or action, etc.
