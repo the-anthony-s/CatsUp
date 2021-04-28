@@ -14,7 +14,7 @@ RSpec.describe 'Messages', type: :request do
 
     context 'when channel exists' do
       it 'returns status code 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it 'returns all channel messages' do
@@ -26,7 +26,7 @@ RSpec.describe 'Messages', type: :request do
       let(:channel_id) { 0 }
 
       it 'returns status code 404' do
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(:not_found)
       end
 
       it 'returns a not found message' do
@@ -41,7 +41,7 @@ RSpec.describe 'Messages', type: :request do
 
     context 'when channel message exists' do
       it 'returns status code 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it 'returns the message' do
@@ -70,7 +70,7 @@ RSpec.describe 'Messages', type: :request do
       before { post "/channels/#{channel_id}/messages", params: valid_attributes }
 
       it 'returns status code 201' do
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(:created)
       end
     end
 
@@ -78,7 +78,7 @@ RSpec.describe 'Messages', type: :request do
       before { post "/channels/#{channel_id}/messages", params: {} }
 
       it 'returns status code 422' do
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'returns a failure message' do
@@ -95,7 +95,7 @@ RSpec.describe 'Messages', type: :request do
 
     context 'when message exists' do
       it 'returns status code 204' do
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(:no_content)
       end
 
       it 'updates the message' do
@@ -108,7 +108,7 @@ RSpec.describe 'Messages', type: :request do
       let(:id) { 0 }
 
       it 'returns status code 404' do
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(:not_found)
       end
 
       it 'returns a not found message' do
@@ -122,7 +122,7 @@ RSpec.describe 'Messages', type: :request do
     before { delete "/channels/#{channel_id}/messages/#{id}" }
 
     it 'returns status code 204' do
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(:no_content)
     end
   end
 end

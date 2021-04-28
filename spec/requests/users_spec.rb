@@ -6,32 +6,16 @@ RSpec.describe 'Users test', type: :request do
   let(:user_name) { users.last.name }
   let(:user_email) { users.last.email }
 
-  # test :index
-  # GET /users
-  describe 'index action -> GET /users' do
-    context 'when params ids is not defined' do
+  describe 'GET /users' do
+    context 'without a query parameter' do
       before { get '/users' }
 
-      it 'returns users' do
-        expect(JSON.parse(response.body)).not_to be_empty
+      it 'returns a paginated list of users' do
         expect(JSON.parse(response.body).size).to eq(10)
       end
 
-      it 'returns 200' do
-        expect(response).to have_http_status(200)
-      end
-    end
-
-    context 'when params ids is defined' do
-      before { get "/users?ids=#{users[1].id},#{users[2].id},#{users[3].id}" }
-
-      it 'returns users' do
-        expect(JSON.parse(response.body)).not_to be_empty
-        expect(JSON.parse(response.body).size).to eq(3)
-      end
-
-      it 'returns 200' do
-        expect(response).to have_http_status(200)
+      it 'returns status code 200' do
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -106,7 +90,7 @@ RSpec.describe 'Users test', type: :request do
     before { delete "/users/#{user_id}" }
 
     it 'returns status code 204' do
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(:no_content)
     end
   end
 
@@ -125,7 +109,7 @@ RSpec.describe 'Users test', type: :request do
       end
 
       it 'returns status code 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -143,7 +127,7 @@ RSpec.describe 'Users test', type: :request do
       end
 
       it 'returns status code 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -152,7 +136,7 @@ RSpec.describe 'Users test', type: :request do
       let(:user_email) { 'veryyyylongemaail@gmail.com' }
 
       it 'returns status code 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it 'returns an empty array' do

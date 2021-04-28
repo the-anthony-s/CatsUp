@@ -1,17 +1,22 @@
-# Create 750 fake users
-# 750 names is the limit for Faker gem
-# rand(..) - used as a simple replacement of a random ID value
-750.times do
-  name = Faker::FunnyName.unique.name
-  email = Faker::Internet.unique.email
-
-  User.create(name: name, email: email)
+30.times do
+  User.create!(name: Faker::FunnyName.unique.name, email: Faker::Internet.unique.email)
 end
 
-300.times do
-  Channel.create(user_id: rand(1..250), recipient_id: rand(250..750), name: Faker::Game.title)
-end
+u1 = User.first
+u2 = User.second
 
-2000.times do
-  Message.create(user_id: rand(1..30), channel_id: rand(1..10), message: Faker::ChuckNorris.fact)
-end
+u1.channels.create(name: Faker::Game.title, recipient_id: u2.id)
+u2.channels.create(name: Faker::Game.title, recipient_id: u2.id)
+
+c1 = Channel.first
+c2 = Channel.second
+
+c1.messages.create(user: u1, message: Faker::ChuckNorris.fact)
+c1.messages.create(user: u2, message: Faker::ChuckNorris.fact)
+c1.messages.create(user: u1, message: Faker::ChuckNorris.fact)
+c1.messages.create(user: u2, message: Faker::ChuckNorris.fact)
+
+c2.messages.create(user: u1, message: Faker::ChuckNorris.fact)
+c2.messages.create(user: u2, message: Faker::ChuckNorris.fact)
+c2.messages.create(user: u1, message: Faker::ChuckNorris.fact)
+c2.messages.create(user: u2, message: Faker::ChuckNorris.fact)

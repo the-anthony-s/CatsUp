@@ -1,8 +1,7 @@
 module Response
   # json render wrapper
   # return OK status by default
-  def json_response(model, _status = :ok)
-    # render json: model, status: status
-    render json: model, status: :ok
+  def json_response(object, _status = :ok)
+    render json: object, status: :ok
   end
 end
