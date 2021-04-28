@@ -9,9 +9,9 @@
 end
 
 300.times do
-  Channel.create(user_id: rand(1..750), recipient_id: rand(1..750), name: Faker::Game.title)
+  Channel.create(user_id: rand(1..250), recipient_id: rand(250..750), name: Faker::Game.title)
 end
 
 2000.times do
-  Message.create(user_id: rand(1..750), channel_id: rand(1..300), message: Faker::ChuckNorris.fact)
+  Message.create(user_id: rand(1..30), channel_id: rand(1..10), message: Faker::ChuckNorris.fact)
 end

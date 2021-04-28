@@ -17,7 +17,8 @@
 #
 class User < ApplicationRecord
   # Relationships
-  has_many :channels, counter_cache: true
+  has_many :channels
+  has_many :messages
 
   # check if name & email presents
   validates_presence_of :name, :email
