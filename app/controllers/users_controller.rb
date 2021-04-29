@@ -8,12 +8,10 @@ class UsersController < ActionController::API
   def index
     # display selected users or return all
     ids = user_params[:ids] ? user_params[:ids].split(',').map(&:to_i) : nil
-    @user = ids ? User.where(id: ids).index_by(&:id).slice(*ids).values : User.all
+    @user = ids ? User.where(id: ids).index_by(&:id).slice(*ids).values : User.default_order.all
 
     json_response(@user)
   end
-
-  def new; end
 
   # POST /users
   def create

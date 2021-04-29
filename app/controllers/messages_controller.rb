@@ -12,8 +12,6 @@ class MessagesController < ActionController::API
     json_response(@channel.messages)
   end
 
-  def new; end
-
   # POST channels/:channel_id/messages
   def create
     @message = @channel.messages.create!(message_params)
@@ -24,8 +22,6 @@ class MessagesController < ActionController::API
   def show
     json_response(@message)
   end
-
-  def edit; end
 
   # PATCH/PUT channels/:channel_id/messages/:id
   def update

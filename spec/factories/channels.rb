@@ -23,7 +23,7 @@
 FactoryBot.define do
   factory :channel do
     name { Faker::Esport.league }
-    user nil
-    recipient nil
+    user_id {}
+    recipient_id {}
   end
 end

@@ -28,6 +28,6 @@ RSpec.describe Channel, type: :model do
 
   # Relationships
   it { is_expected.to belong_to(:user) }
-  it { is_expected.to belong_to(:recipient) }
+  # it { is_expected.to belong_to(:recipient) }
   it { is_expected.to have_many(:messages).dependent(:destroy) }
 end

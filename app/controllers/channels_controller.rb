@@ -10,20 +10,16 @@ class ChannelsController < ActionController::API
     json_response(@channels)
   end
 
-  def new; end
-
   # POST /channels
   def create
     @channel = Channel.create!(channel_params)
-    json_response(@channels)
+    json_response(@channel)
   end
 
   # GET /channels/:id
   def show
     json_response(@channel)
   end
-
-  def edit; end
 
   # PATCH/PUT /channels/:id
   def update
@@ -38,6 +34,7 @@ class ChannelsController < ActionController::API
   end
 
   # GET /channels/search?name=params[:name]
+  # RESEARCH
   def search
     name = channel_params[:name] ? channel_params[:name].downcase : ' '
     @channels = Channel.where('lower(name) LIKE ?', "%#{name}%").map(&:as_json)
